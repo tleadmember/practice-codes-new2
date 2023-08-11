@@ -1,0 +1,104 @@
+/*
+TQBH - 2023-04-17
+Merge Sort Algorithm
+*/
+
+#include <iostream>
+
+// Define function to print an array
+void printarray(int array[], int length) {
+  using std::cout;
+  using std::endl;
+  for (int index = 0; index < length; index++) {
+    cout << array[index] << " ";
+  }
+  cout << endl;
+}
+
+// Define merge() auxiliary function
+void merge(int array[], int start, int mid, int end) {
+  using std::cout;
+  using std::endl;
+  // Lengths of arrays L and R
+  int nL = mid - start + 1;
+  int nR = end - (mid + 1) + 1;
+  // Define blank  arrays L and R
+  int L[nL] = {};
+  int R[nR] = {};
+  // Copy into arrays L and R
+  for (int i = 0; i < nL; i++) {
+    L[i] = array[start+i];
+  }
+  for (int j = 0; j < nR; j++) {
+    R[j] = array[mid+1+j];
+  }
+  // Compare merge
+  int i = 0;
+  int j = 0;
+  int k = start;
+  while (i < nL && j < nR) {
+    if (L[i] < R[j]) {
+      array[k] = L[i];
+      i = i + 1;
+    }
+    else {
+      array[k] = R[j];
+      j = j + 1;
+    }
+    k = k + 1;
+  }
+  // Copy the rest of either L or R into A
+  while (i < nL) {
+    array[k] = L[i];
+    i = i + 1;
+    k = k + 1;
+  }
+  while (j < nR) {
+    array[k] = R[j];
+    j = j + 1;
+    k = k + 1;
+  }
+}
+
+// Define merge-sort() function
+void merge_sort(int array[], int start, int end) {
+  using std::cout;
+  using std::endl;
+  // Check if single or zero element, then return immediately
+  if (start >= end) {
+    return;
+  }
+  // Define mid index
+  int mid = (start + end) / 2 ;
+  // Recursive merge sort, first half
+  merge_sort(array, start, mid);
+  // Recursive merge sort, second half
+  merge_sort(array, mid+1, end);
+  // Merge
+  merge(array, start, mid, end);
+}
+
+// Main function
+int main() {
+  using std::cout;
+  using std::endl;
+  // Suppose we are given an unsorted array
+  int A[] = { 7, 2, 4, 5, 3, 1, 9, 8, 6 };
+
+  // Find length of array
+  int len = *(&A + 1) - A;
+  cout << "Length of array: " << len << endl;
+  
+  // Print unsorted array
+  cout << "Unsorted array A:" << endl;
+  printarray(A, len);
+
+  // Perform merge sort
+  merge_sort(A, 0, len-1);
+
+  // Print sorted array
+  cout << "Sorted array A:" << endl;
+  printarray(A, len);
+  
+  return 0;
+}

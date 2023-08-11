@@ -1,0 +1,10 @@
+// TQBH - 2023-04-10
+// Insertion sort algorithm
+
+#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "Hello world.";
+  return 0;
+}
