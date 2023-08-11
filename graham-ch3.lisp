@@ -166,4 +166,39 @@ w
 
 
 ;; 3.6 - Access
-					; CONTINUE HERE
+(nth 0 '(a b c))
+(nthcdr 2 '(a b c d))
+
+; without error checking
+(defun our-nthcdr (n lst)
+  (if (zerop n)
+   lst
+   (our-nthcdr (- n 1) (cdr lst))))
+(our-nthcdr 2 '(a b c d))
+
+(last '(a b c))
+(nth 2 '(a b c))			; last returns a cons, while
+					; nth returns an atom
+(car (last '(a b c)))
+
+(second '(a b c))
+(nth 1 '(a b c))
+
+(car (cdr '(a b c)))
+(cadr '(a b c))
+
+
+;; 3.7 - Mapping Functions
+(mapcar #'(lambda (x) (+ x 10))
+	'(1 2 3))
+
+(mapcar #'list
+	'(a b c)
+	'(1 2 3))
+
+(maplist #'(lambda (x) x)
+	 '(a b c))
+
+
+;; 3.8 - Trees
+
