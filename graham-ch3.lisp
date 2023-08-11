@@ -223,3 +223,7 @@ w
        (cons (our-subst new old (car tree)) (our-subst new old (cdr tree))))))
 
 (our-subst 'y 'x '(and (integerp x) (zerop (mod x 2))))
+
+
+;; 3.9 - Understanding Recursion
+					; CONTINUE HERE
