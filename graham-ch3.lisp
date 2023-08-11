@@ -201,4 +201,28 @@ w
 
 
 ;; 3.8 - Trees
+(copy-tree '(a (b c) d))
 
+(defun our-copy-tree (tr)
+  (if (atom tr)
+      tr
+      (cons (our-copy-tree (car tr)) (our-copy-tree (cdr tr)))))
+					; slightly different from
+					; copy-list
+
+(our-copy-tree '(a (b c) d))
+
+(substitute 'y 'x '(and (integerp x) (zerop (mod x 2)))); not work
+(subst 'y 'x '(and (integerp x) (zerop (mod x 2))))	; works
+
+(defun our-subst (new old tree)
+  (if (eql tree old)
+      new
+      (if (atom tree)
+       tree
+       (cons (our-subst new old (car tree)) (our-subst new old (cdr tree)))
+       )
+   )
+  )
+
+(our-subst 'y 'x '(and (integerp x) (zerop (mod x 2))))
