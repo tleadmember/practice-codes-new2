@@ -226,4 +226,23 @@ w
 
 
 ;; 3.9 - Understanding Recursion
-					; CONTINUE HERE
+(defun len (lst)
+  (if (null lst)
+      0
+      (+ 1 (len (cdr lst)))))
+
+(len nil)
+(len '(a b))
+(len '(a b c))
+					
+(defun len1 (lst acc)
+  (if (null lst)
+      acc
+      (len1 (cdr lst) (+ 1 acc))))
+
+(len1 nil 0)
+(len1 '(a b) 0)
+(len1 '(a b c) 0)
+
+
+;; 3.10 - Sets
