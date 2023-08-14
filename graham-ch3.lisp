@@ -396,7 +396,7 @@ trans
 
 (defun shortest-path (start end net)
   (bfs end (list (list start)) net))
-(defun bfs (end queue net)
+(defun bfs (end queue net)		; queue = queue of paths
   (if (null queue)
       nil
       (let ((path (car queue)))
@@ -413,3 +413,8 @@ trans
 
 
 ;; 3.16 - Garbage
+;; garbage collection - scavenging for memory no longer needed
+(defparameter lst (list 'a 'b 'c))
+(defparameter lst nil)
+
+
