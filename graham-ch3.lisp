@@ -246,3 +246,5 @@ w
 
 
 ;; 3.10 - Sets
+(member 'b '(a b c))
+
