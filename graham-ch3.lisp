@@ -365,3 +365,51 @@ y
 
 
 ;; 3.14 - Assoc Lists
+(defparameter trans '((+ . "add") (- . "subtract")))
+trans
+(assoc '+ trans)
+(assoc '* trans)
+
+(defun our-assoc (key alist)
+  (and (consp alist)
+       (let ((pair (car alist)))
+	 (if (eql key (car pair))
+	     pair
+	     (our-assoc key (cdr alist))))))
+
+(our-assoc '+ trans)
+(our-assoc '* trans)
+
+
+;; 3.15 - Example: Shortest Path
+(list 'a)
+(list (list 'a))
+(car (list (list 'a)))
+
+(mapcar #'(lambda (n) (cons n '(a)))
+	'(b c))
+
+;; (node . neighbors)
+(defparameter min-net '((a b c) (b c) (c d)))
+(assoc 'a min-net)
+(cdr (assoc 'a min-net))		; list of neighbors of a
+
+(defun shortest-path (start end net)
+  (bfs end (list (list start)) net))
+(defun bfs (end queue net)
+  (if (null queue)
+      nil
+      (let ((path (car queue)))
+	(let ((node (car path)))
+	  (if (eql node end)
+	      (reverse path)
+	      (bfs end
+		   (append (cdr queue) (new-paths path node net))
+		   net))))))
+(defun new-paths (path node net)
+  (mapcar #'(lambda (n) (cons n path)) (cdr (assoc node net))))
+
+(shortest-path 'a 'd min-net)
+
+
+;; 3.16 - Garbage
