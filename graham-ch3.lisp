@@ -277,5 +277,40 @@ w
 (set-difference '(a b c d e) '(b e))
 
 ;; 3.11 - Sequences
+;; In Common Lisp, types of Sequences include: Lists, Vectors
+(length '(a b c))
+
+(subseq '(a b c d) 1 2)
+(subseq '(a b c d) 1)
+
+(reverse '(a b c))
+
+(defun mirror? (s)
+  (let ((len (length s)))
+    (and (evenp len)
+	 (let ((mid (/ len 2)))
+	   (equal (subseq s 0 mid)
+		  (reverse (subseq s mid)))))))
+
+(mirror? '(a b b a))
+
+(defparameter lst1 '(0 2 3 1 8))
+(sort lst1 #'>)
+lst1					; sort is destructive, should
+					; use copy if don't want modified
+
+(defun nthmost (n lst)
+  (nth (- n 1) (sort (copy-list lst) #'>)))
+
+(nthmost 2 '(0 2 3 1 8))
+
+(every #'oddp '(1 3 5))
+
+(some #'evenp '(1 2 3))
+
+(every #'> '(1 3 5) '(0 2 4))
+(every #'> '(1 3 5) '(0 2 ))		; shortest sequence decides
+					; number of tests
 
 
+;; 3.12 - Stacks
