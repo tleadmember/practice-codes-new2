@@ -314,3 +314,54 @@ lst1					; sort is destructive, should
 
 
 ;; 3.12 - Stacks
+;; (push obj lst)
+;; (setf lst (cons obj lst))
+
+;; (pop lst)
+;; (let ((x (car lst)))
+;;   (setf lst (cdr lst))
+;;   x)
+
+(defparameter x '(b))
+(push 'a x)
+x
+(defparameter y x)
+y
+(pop x)
+x
+y
+
+(defun our-reverse (lst)
+  (let ((acc nil))
+    (dolist (elt lst acc) (push elt acc))))
+
+(our-reverse '(a b c))
+
+(let ((x '(a b)))
+  (pushnew 'c x)
+  (pushnew 'a x)
+  x)
+
+
+;; 3.13 - Dotted Lists
+(defun proper-list? (x)
+  (or (null x)
+      (and (consp x)
+	   (proper-list? (cdr x)))))
+
+(let ((pair (cons 'a 'b)))
+  pair)					; not a proper list, but a
+					; dotted list (not truly list)
+
+'(a . (b . (c . nil)))			; can express proper lists
+					; with dot notation too
+
+(cons 'a (cons 'b (cons 'c 'd)))
+
+'(a . (b . nil))
+'(a . (b))
+'(a b . nil)
+'(a b)
+
+
+;; 3.14 - Assoc Lists
