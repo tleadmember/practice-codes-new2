@@ -248,3 +248,34 @@ w
 ;; 3.10 - Sets
 (member 'b '(a b c))
 
+(member '(z) '((a) (z)) :test #'equal)
+
+(member 'c '((a b) (c d)) :key #'car)
+
+(member 2 '((1) (2)) :key #'car :test #'equal)
+(member 2 '((1) (2)) :test #'equal)
+(member 2 '((1) (2)) :test #'equal :key #'car)
+
+(member-if #'oddp '(2 3 4))
+
+(defun our-member-if (fn lst)
+  (and (consp lst)				       
+       (if (funcall fn (car lst))
+	   lst
+	   (our-member-if fn (cdr lst)))))
+					; if lst not a cons, and will
+					; return nil
+
+(our-member-if #'oddp '(2 3 4))
+(our-member-if #'oddp 3)
+
+(adjoin 'b '(a b c))
+(adjoin 'z '(a b c))
+
+(union '(a b c) '(c b s))
+(intersection '(a b c) '(b b c))
+(set-difference '(a b c d e) '(b e))
+
+;; 3.11 - Sequences
+
+
