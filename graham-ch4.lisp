@@ -14,4 +14,5 @@ arr
 (setf (aref arr 0 0) 'b)		; replace, cannot use setq
 arr
 
-#2a((b nil nil) (nil nil nil))		; ILLEGAL FUNCTION CALL
+#2a((b nil nil) (nil nil nil))		; only runs in REPL, or
+					; highlight and C-c C-r
