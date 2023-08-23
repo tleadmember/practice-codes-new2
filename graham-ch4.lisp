@@ -16,3 +16,23 @@ arr
 
 #2a((b nil nil) (nil nil nil))		; only runs in REPL, or
 					; highlight and C-c C-r
+
+(setf *print-array* nil)
+arr
+
+(setf *print-array* t)
+arr
+
+(defparameter vec (make-array 4 :initial-element nil))	; 1-D array = vector
+vec
+
+(vector "a" 'b 3)
+
+#('a 'b 'c)				; define vector literally
+
+(svref vec 0)
+(setf (svref vec 0) 'm)
+vec
+
+
+;; 4.2 - Example: Binary Search
